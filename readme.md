@@ -7,6 +7,8 @@ This is a starter package to create alexa skills using ES6 and pre-transpiling w
 1. Clone This repo
 2. Run `npm install`
 3. Edit `action` files as needed
+4. Run `gulp build`. This will create a file called package.zip in the root of your project.
+5. Upload `package.zip` to your Lambda
 
 ##Files
 

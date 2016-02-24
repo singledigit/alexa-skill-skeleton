@@ -8,7 +8,7 @@ export class ResponseModel {
   repromptText = '';
   shouldEndSession = false;
 
-  buildSpeechResponse() {
+  get buildSpeechResponse() {
     return {
       outputSpeech: {
         type: "PlainText",

@@ -1,1 +1,1 @@
-*** Alexa Skill ES6 Skeleton
+###Alexa Skill ES6 Skeleton

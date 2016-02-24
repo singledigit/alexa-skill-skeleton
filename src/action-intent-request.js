@@ -5,7 +5,7 @@
 let model = require('./response-model'),
   utilities = require('./utilities'),
   ActionLaunchRequest = require('./action-launch-request'),
-  api = require('dictionary-api-client');
+  client = require('api-client');
 
 export function intent(event, context) {
 
@@ -22,7 +22,7 @@ export function intent(event, context) {
   if(!word){
     ActionLaunchRequest.launch(event, context);
   } else {
-    api.get(word, function (apiResponse) {
+    client.get(`http://dictionaryapi.net/api/definition/${word}`, function (apiResponse) {
       if (intentName === 'GetDefinition') {
         define(apiResponse, responseModel, word, context);
       }

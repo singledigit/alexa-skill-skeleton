@@ -4,26 +4,26 @@
 
 let http = require('http');
 
-export function get(word, callback) {
+export function get(url, callback) {
   let data = {
     content: '',
     status: 0
   };
 
-  http.get(`http://dictionaryapi.net/api/definition/${word}`, function (response) {
+  http.get(url, response => {
     data.status = response.statusCode;
 
-    response.on('data', function (chunk) {
+    response.on('data', chunk => {
       data.content += chunk;
     });
 
-    response.on('end', function () {
+    response.on('end', () => {
       data.content = JSON.parse(data.content);
       callback(data);
     });
 
     response.resume();
-  }).on('error', function (error) {
-    context.fail('There was a problem with the dictionary API')
+  }).on('error', error => {
+    context.fail(error);
   });
 }

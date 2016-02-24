@@ -19,7 +19,7 @@ export function launch(event, context){
   responeModel.shouldEndSession = false;
 
   // build response speechlet
-  let speechlet = responeModel.buildSpeechResponse();
+  let speechlet = responeModel.buildSpeechResponse;
 
   // build response
   let buildResponse = utilities.buildResponse(responeModel.sessionAttributes, speechlet);

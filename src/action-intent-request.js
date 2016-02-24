@@ -4,6 +4,7 @@
 
 let model = require('./response-model'),
   utilities = require('./utilities'),
+  ActionLaunchRequest = require('./action-launch-request'),
   api = require('dictionary-api-client');
 
 export function intent(event, context) {
@@ -17,19 +18,23 @@ export function intent(event, context) {
 
   let word = intent.slots.Word.value;
 
-  api.get(word, function(apiResponse){
-    if(intentName === 'GetDefinition'){
-      define(apiResponse, responseModel, word, context);
-    }
-
-    if(intentName === 'GetSpelling'){
-      spell(apiResponse, responseModel, word, context);
-    }
-
-  });
+  // interrupt if there is no word
+  if(!word){
+    ActionLaunchRequest.launch(event, context);
+  } else {
+    api.get(word, function (apiResponse) {
+      if (intentName === 'GetDefinition') {
+        define(apiResponse, responseModel, word, context);
+      }
+      if (intentName === 'GetSpelling') {
+        spell(apiResponse, responseModel, word, context);
+      }
+    });
+  }
 }
 
 function define(response, model, word, context) {
+
   if (response.status === 200 && response.content.length > 0) {
     model.cardTitle = `${word} defined`;
     model.speechOutput = `The ${response.content[0].PartOfSpeech} form of the word ${word} comes from the root word ${response.content[0].Word}, and means... ${response.content[0].Definitions[0]}`;

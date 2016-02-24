@@ -14,6 +14,11 @@ export function dictionary(event, context){
   // Verify this is our app
   Utilities.validateApplicationId(event, context);
 
+  // Log Session
+  if (event.session.new) {
+    console.log(`Session has started.  Request Id = ${event.request.requestId} and Session Id = ${event.session.sessionId}.`);
+  }
+
   // call correct action based on request type
   switch(type){
     case 'LaunchRequest':
@@ -23,13 +28,10 @@ export function dictionary(event, context){
       ActionIntentRequest.intent(event, context);
       break;
     case 'SessionEndRequest':
-      ActionSessionEndRequest.intentSessionEnd(event, context);
+      ActionSessionEndRequest.sessionEnd(event, context);
       break;
     default:
       ActionLaunchRequest.launch(event, context);
       break;
   }
-
-  // fails if nothing else passes success
-  //context.fail('launch request not fired');
 }

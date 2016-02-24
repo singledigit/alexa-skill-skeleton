@@ -8,6 +8,8 @@ let model = require('./response-model'),
 
 export function intent(event, context) {
 
+  console.log('Intent Requested');
+
   // get intent info
   let intent = event.request.intent,
     intentName = intent.name,
@@ -15,13 +17,13 @@ export function intent(event, context) {
 
   let word = intent.slots.Word.value;
 
-  api.get(word, function(foo){
+  api.get(word, function(apiResponse){
     if(intentName === 'GetDefinition'){
-      define(foo, responseModel, word, context);
+      define(apiResponse, responseModel, word, context);
     }
 
     if(intentName === 'GetSpelling'){
-      spell(foo, responseModel, word, context);
+      spell(apiResponse, responseModel, word, context);
     }
 
   });

@@ -10,19 +10,19 @@ export function get(word, callback) {
     status: 0
   };
 
-  http.get(`http://dictionaryapi.net/api/definition/${word}`, function (res) {
-    data.status = res.statusCode;
+  http.get(`http://dictionaryapi.net/api/definition/${word}`, function (response) {
+    data.status = response.statusCode;
 
-    res.on('data', function (chunk) {
+    response.on('data', function (chunk) {
       data.content += chunk;
     });
 
-    res.on('end', function () {
+    response.on('end', function () {
       data.content = JSON.parse(data.content);
       callback(data);
     });
 
-    res.resume();
+    response.resume();
   }).on('error', function (error) {
     context.fail('There was a problem with the dictionary API')
   });

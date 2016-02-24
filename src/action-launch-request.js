@@ -7,6 +7,8 @@ let model = require('./response-model'),
 
 export function launch(event, context){
 
+  console.log('Launch Requested');
+
   // set response info
   let responeModel = new model.ResponseModel();
 

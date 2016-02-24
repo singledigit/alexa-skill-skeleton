@@ -32,5 +32,3 @@ Provides global functions for the application.
 
 ###api-client.js
 Helpful if this app needs to make a call to a rest API, which the skeleton example does.
-
-Most work to done will be in the action-intent-request.js file. Feel free to post a comment, issue, or pull-request if you find an issue or improvement.
